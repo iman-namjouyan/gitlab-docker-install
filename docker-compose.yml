@@ -1,0 +1,23 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:v17.3.2
+    restart: always
+    domainname: gitlab.mydomain.com
+    hostname: gitlab.mydomain.com
+    container_name: gitlab
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
+    privileged: true
+    ports:
+      - "80:80"
+      - "2222:22"
+      - "443:443"
+    environment:
+      TZ: "Asia/Tehran"
+    volumes:
+      - /gitlab/opt:/var/opt/gitlab
+      - /gitlab/log:/var/log/gitlab
+      - /gitlab/etc:/etc/gitlab
